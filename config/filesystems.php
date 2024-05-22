@@ -13,7 +13,20 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'local'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Cloud Filesystem Disk
+    |--------------------------------------------------------------------------
+    |
+    | Many applications store files both locally and in the cloud. For this
+    | reason, you may specify a default "cloud" driver here. This driver
+    | will be bound as the Cloud disk implementation in the container.
+    |
+    */
+
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -22,9 +35,9 @@ return [
     |
     | Here you may configure as many filesystem "disks" as you wish, and you
     | may even configure multiple disks of the same driver. Defaults have
-    | been set up for each driver as an example of the required values.
+    | been setup for each driver as an example of the required options.
     |
-    | Supported Drivers: "local", "ftp", "sftp", "s3"
+    | Supported Drivers: "local", "ftp", "sftp", "s3", "rackspace"
     |
     */
 
@@ -33,15 +46,12 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
-            'throw' => false,
         ],
 
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
-            'throw' => false,
         ],
 
         's3' => [
@@ -51,26 +61,93 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-            'throw' => false,
         ],
 
-    ],
+        'user_avtar' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/profile',
+        ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Symbolic Links
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Artisan command is executed. The array keys should be
-    | the locations of the links and the values should be their targets.
-    |
-    */
+        'login_bg' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/login_bg',
+        ],
 
-    'links' => [
-        public_path('storage') => storage_path('app/public'),
+        'company_logo' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/company_logo',
+        ],
+        
+        'company_sidebar_logo' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/company_sidebar_logo',
+        ],
+
+        'sidebar_background_images' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/sidebar_background_images',
+        ],
+
+        'translation' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/translation',
+        ],
+
+        'project_uploads' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/project',
+        ],
+
+        'project_attachment' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/project_attachment',
+        ],
+
+        'task_attachment' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/task_attachment',
+        ],
+
+        'defect' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/defect',
+        ],
+
+        'defect_attachment' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/defect_attachment',
+        ],
+
+        'incident_attachment' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/incident_attachment',
+        ],
+
+        'category_attachment' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/category_attachment',
+        ],
+        
+        'article_attachment' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/article_attachment',
+        ],
+
+        'leave_attachment' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/leave_attachment',
+        ],
+
+        'estimate_logo' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/estimate_logo',
+        ],
+
+        'invoice_logo' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads/invoice_logo',
+        ]
+
     ],
 
 ];
